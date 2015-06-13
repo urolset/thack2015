@@ -1,0 +1,20 @@
+{
+  "name": "thack2015",
+  "version": "1.0.0",
+  "description": "OLSET Inc.'s team project for Tnooz THackSFO 2015",
+  "main": "server.py",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "python run.py"
+   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/urolset/thack2015.git"
+  },
+  "author": "Kathryn Lewis, Phillip Long, Shreyas Kalyan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/urolset/thack2015/issues"
+  },
+  "homepage": "https://github.com/urolset/thack2015#readme"
+}
