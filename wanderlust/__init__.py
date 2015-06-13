@@ -1,4 +1,6 @@
 from flask import Flask
-app = Flask(__name__)
+import config
+
+app = Flask(__name__, static_folder=config.STATIC_ROOT, template_folder=config.TEMPLATE_ROOT)
 
 import wanderlust.views
