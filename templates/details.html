@@ -2,6 +2,8 @@
 <section class="container">
   <header>
     <h1>Trip Itinerary</h1>
+    <span>to {{$vm.details.city}}</span>
+    <button class="btn btn-primary">Book It!</button>
   </header>
   <div class="">
     <header class="trip-general-info">
@@ -13,39 +15,23 @@
 
   <div class="itinerary-flight">
     <h2>Departure Flight <i class="itinerary-icon flight-icon flight-departure"></i></h2>
-    <h3>{{$vm.details.out.airline}}</h3>
-    <span>{{$vm.details.out.departureIATA}} {{$vm.details.out.departureDate | date:"h:mm a MMMM d, yyyy" }}</span>
+    <span>SFO {{$vm.details.DepartureDateTime | date:"h:mm a MMMM d, yyyy" }}</span>
     --&gt;
-    <span>{{ $vm.details.out.arrivalIATA}} {{$vm.details.out.arrivalDate | date:"h:mm a MMMM d, yyyy" }}</span>
+    <span>{{ $vm.details.DestinationLocation }}</span>
   </div>
 
   <div class="itinerary-hotel">
-    <h2>Hotels Recommendations</h2>
-    <span>Pick one</span>
+    <h2>Hotels Recommendations <span>Pick one</span></h2>
 
     <ul class="list-unstyled list-inline">
-      <li class="hotel-option">
+      <li class="hotel-option" ng-repeat="hotel in $vm.hotels track by $index">
         <div>
-          <label for="hotel-1">
+          <label for="hotel-{{$index}}">
             <img src="" alt="hotel">
           </label>
-          <input id="hotel-1" name="hotel" type="radio">
-        </div>
-      </li>
-      <li class="hotel-option">
-        <div>
-          <label for="hotel-2">
-            <img src="" alt="hotel">
-          </label>
-          <input id="hotel-2" name="hotel" type="radio">
-        </div>
-      </li>
-      <li class="hotel-option">
-        <div>
-          <label for="hotel-3">
-            <img src="" alt="hotel">
-          </label>
-          <input id="hotel-3" name="hotel" type="radio">
+          <span>{{hotel.property_nam}}</span>
+          <span>{{hotel.total_price.amount | currency }}</span>
+          <input id="hotel-{{$index}}" name="hotel" type="radio">
         </div>
       </li>
     </ul>
@@ -54,9 +40,9 @@
   <div class="itinerary-flight">
     <h2>Arrival Flight <i class="itinerary-icon flight-icon flight-arrival"></i></h2>
     <h3>{{$vm.details.in.airline}}</h3>
-    <span>{{$vm.details.in.departureIATA}} {{$vm.details.in.departureDate | date:"h:mm a MMMM d, yyyy" }}</span>
+    <span>{{$vm.details.DestinationLocation}} {{$vm.details.DepartureDateTime | date:"h:mm a MMMM d, yyyy" }}</span>
     --&gt;
-    <span>{{ $vm.details.in.arrivalIATA}} {{$vm.details.in.arrivalDate | date:"h:mm a MMMM d, yyyy" }}</span>
+    <span>SFO</span>
   </div>
 </section>
 {% endraw %}

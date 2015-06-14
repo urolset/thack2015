@@ -1,6 +1,15 @@
 {% raw %}
 <section class="container">
-  <datepicker class="wl-datepicker text-center" ng-model="$vm.tripInfo.startDate" min-date="$vm.datepickerConfig.minDate" required></datepicker>
+  <div class="text-center">
+    <div class="wl-datepicker">
+      <span>Departure Date</span>
+      <datepicker class="text-center" ng-model="$vm.tripInfo.startDate" min-date="$vm.datepickerConfig.minDate" required></datepicker>
+    </div>
+    <div class="wl-datepicker">
+      <span>Return Date</span>
+      <datepicker class="text-center" ng-model="$vm.tripInfo.endDate" min-date="$vm.tripInfo.startDate" required></datepicker>
+    </div>
+  </div>
 
   <div class="">
     <form novalidate>
@@ -16,7 +25,7 @@
         </select>
       </div>
 
-      <div class="form-group">
+      <div class="form-group text-right">
         <button class="btn btn-primary" ng-click="$vm.submitForm()" type="submit">Find My Trip!</button>
       </div>
     </form>

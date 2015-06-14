@@ -12,11 +12,10 @@
     </div>
   </hgroup>
 
-  <article class="trip-panel container-fluid panel" id="trip-{{trip.index}}" ng-repeat="trip in $vm.tripList" data-delay="{{$index}}">
+  <article class="trip-panel container-fluid panel" id="trip-{{$index}}" ng-repeat="trip in $vm.tripList track by $index" data-delay="{{$index}}">
     <div>
       <hgroup>
         <h2>{{ trip.city }}</h2>
-        <aside>{{ trip.DestinationLocation }}</aside>
       </hgroup>
       <div class="trip-activity-group">
         <div class="trip-activity">
@@ -37,8 +36,8 @@
       </div>
 
       <div class="text-right">
-        <a class="btn btn-default" ng-href="/trip/details/{{trip.index}}">Details</a>
-        <button class="btn btn-success">Book this Trip!</button>
+        <a class="btn btn-primary" ng-href="/trip/{{$index}}" ng-click="$vm.selectTrip(trip)">View this Trip</a>
+        <!--<button class="btn btn-success">Book this Trip!</button>-->
       </div>
     </div>
     <div ui-view></div>

@@ -6,55 +6,13 @@
 
     /* @ngInject */
     function wlTripQueryFactory ($http, $q, $timeout) {
-        var endPoint = '/dest_finder';
-        var _tripInfo = {};
-        var _mockData = {
-            theme: 'THEME-PARK',
-            departureDate: new Date('10/01/2015'),
-            arrivalDate: new Date('10/04/2015'),
-            trips: [
-                {
-                    index: 1,
-                    city: 'Los Angeles',
-                    out: {
-                        airline: 'Virgin America',
-                        departureIATA: 'SFO',
-                        arrivalIATA: 'LAX',
-                        departureDate: new Date('10/01/2015 09:00'),
-                        arrivalDate: new Date('10/01/2015 10:30')
-                    },
-                    in: {
-                        airline: 'Virgin America',
-                        departureIATA: 'LAX',
-                        arrivalIATA: 'SFO',
-                        departureDate: new Date('10/04/2015 20:25'),
-                        arrivalDate: new Date('10/04/2015 22:00')
-                    }
-                },
-                {
-                    index: 2,
-                    city: 'Boston',
-                    out: {
-                        airline: 'American Airlines',
-                        departureIATA: 'SFO',
-                        arrivalIATA: 'BOS',
-                        departureDate: new Date('10/01/2015 11:00'),
-                        arrivalDate: new Date('10/01/2015 12:30')
-                    },
-                    in: {
-                        airline: 'American Airlines',
-                        departureIATA: 'BOS',
-                        arrivalIATA: 'SFO',
-                        departureDate: new Date('10/04/2015 22:25'),
-                        arrivalDate: new Date('10/04/2015 23:50')
-                    }
-                }
-            ]
-        };
-
+        var endPoint = '/dest_finder',
+            _tripInfo = {},
+            _trip = {};
 
         return {
             get: get,
+            getIndex: getIndex,
             getTripInfo: getTripInfo,
             setTripInfo: setTripInfo
         };
@@ -62,7 +20,25 @@
         ////////////////////////////////////////////////////////////////////
 
         function get () {
+            if (_trip.FareInfo) {
+                return _trip;
+            }
+
+            if (_tripInfo)
+
             return _POST(_tripInfo);
+        }
+
+        function getIndex (i) {
+            console.log('index', i);
+            if (_trip.FareInfo && _trip.FareInfo.length > 0) {
+                return _trip.FareInfo[i];
+            }
+
+            return _POST(_tripInfo).then(function (data) {
+                    console.log('get index', data);
+                    return data.FareInfo[i];
+                });
         }
 
         function getTripInfo () {
@@ -73,11 +49,11 @@
             _tripInfo = ti;
         }
 
-
         function _POST (params) {
             return $http.post(endPoint, params)
                 .success(function (data) {
-                    console.log('get stuff!', data);
+                    _trip = data;
+
                     return data;
                 });
         }

@@ -19,8 +19,12 @@
                 controller: 'TripCtrl',
                 controllerAs: '$vm',
                 resolve: {
-                    tripQuery: function ($route, wlTripQuery) {
-                        if ($route.current.params.startDate && $route.current.params.endDate && $route.current.params.theme) {
+                    tripQuery: function ($route, utils, wlTripQuery) {
+                        if (utils.isEmpty(wlTripQuery.getTripInfo()) &&
+                                $route.current.params.startDate &&
+                                $route.current.params.endDate &&
+                                $route.current.params.theme)
+                        {
                             var tripInfo = {
                                 startDate: new Date($route.current.params.startDate),
                                 endDate: new Date($route.current.params.endDate),
@@ -35,14 +39,15 @@
                     }
                 }
             })
-            .when('/trip/details/:tripIndex', {
+            .when('/trip/:tripIndex', {
                 templateUrl: '/ng/details.html',
                 controller: 'DetailCtrl',
                 controllerAs: '$vm',
                 resolve: {
                     tripDetails: function ($route, wlTripQuery) {
                         var index = $route.current.params.tripIndex;
-                        return wlTripQuery.get(index);
+
+                        return wlTripQuery.getIndex(index);
                     }
                 }
             })
