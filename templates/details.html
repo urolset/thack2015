@@ -1,9 +1,11 @@
 {% raw %}
 <section class="container">
-  <header>
-    <h1>Trip Itinerary</h1>
-    <span>to {{$vm.details.city}}</span>
-    <button class="btn btn-primary">Book It!</button>
+  <button class="btn btn-success btn-fab btn-action shadow-z-4">
+    <i class="mdi-action-book"></i>
+  </button>
+  <header class="row">
+    <h1 class="col-sm-9">Trip Itinerary <span>to {{$vm.details.city}}</span></h1>
+    <div class="col-sm-3 text-right"><button class="btn btn-primary">Book It!</button></div>
   </header>
   <div class="">
     <header class="trip-general-info">
@@ -13,42 +15,51 @@
     </header>
   </div>
 
-  <div class="itinerary-flight">
-    <h2>Departure Flight <i class="itinerary-icon flight-icon flight-departure"></i></h2>
-    <span>SFO {{$vm.details.DepartureDateTime | date:"h:mm a MMMM d, yyyy" }}</span>
-    --&gt;
-    <span>{{ $vm.details.DestinationLocation }}</span>
+  <div class="well shadow-z-2">
+    <div class="itinerary-flight">
+      <h2>Departure Flight <i class="itinerary-icon flight-icon flight-departure"></i></h2>
+      <div class="flight-content pull-right">
+        <span><b class="IATA-origin text-primary">SFO</b> {{$vm.details.DepartureDateTime | date:"h:mm a MMMM d, yyyy" }}</span>
+        --&gt;
+        <span><b class="IATA-destination text-danger">{{ $vm.details.DestinationLocation }}</b></span>
+      </div>
+    </div>
+
+    <div class="itinerary-flight">
+      <h2>Return Flight <i class="itinerary-icon flight-icon flight-arrival"></i></h2>
+      <div class="flight-content pull-right">
+        <span><b class="IATA-destination text-danger">{{$vm.details.DestinationLocation}}</b> {{$vm.details.DepartureDateTime | date:"h:mm a MMMM d, yyyy" }}</span>
+        --&gt;
+        <span><b class="IATA-origin text-primary">SFO</b></span>
+      </div>
+    </div>
   </div>
 
-  <div class="itinerary-hotel">
-    <h2>Hotels Recommendations <span>Pick one</span></h2>
+  <div class="itinerary-hotel well shadow-z-2">
+    <h2>Hotels Recommendations <div class="logo-amadeus"></div>
+</h2>
 
     <ul class="list-unstyled list-inline">
       <li class="hotel-option" ng-repeat="hotel in $vm.hotels track by $index">
-        <div>
+        <div class="hotel-card panel">
           <label for="hotel-{{$index}}">
-            <img src="" alt="hotel">
+            <img ng-src="/static/images/photos/{{$vm.details.city}}-{{$index}}.jpg" alt="hotel">
           </label>
-          <span>{{hotel.property_nam}}</span>
-          <span>{{hotel.total_price.amount | currency }}</span>
-          <input id="hotel-{{$index}}" name="hotel" type="radio">
+          <div class="hotel-content">
+            <span class="hotel-name">{{hotel.property_name}}</span>
+            <span class="hotel-price">{{hotel.total_price.amount | currency }}</span>
+          </div>
+          <input id="hotel-{{$index}}" name="hotel" type="radio" hidden>
         </div>
       </li>
     </ul>
   </div>
 
   <div class="itinerary-gallery">
-    <div ng-repeat="image in $vm.venues.photos">
-      <img ng-src="{{image}}" alt="flickr image">
+    <h2 class="text-center">Gallery</h2>
+    <div class="gallery-wrap">
+      <div class="gallery-item" ng-repeat="image in $vm.venues.photos" style="background-image: url('{{image}}')"></div>
     </div>
-  </div>
-
-  <div class="itinerary-flight">
-    <h2>Arrival Flight <i class="itinerary-icon flight-icon flight-arrival"></i></h2>
-    <h3>{{$vm.details.in.airline}}</h3>
-    <span>{{$vm.details.DestinationLocation}} {{$vm.details.DepartureDateTime | date:"h:mm a MMMM d, yyyy" }}</span>
-    --&gt;
-    <span>SFO</span>
   </div>
 </section>
 {% endraw %}

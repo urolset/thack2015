@@ -27,7 +27,7 @@ def dest_finder(startDate, endDate, theme, budget):
 	end = "&returndate=" + endDate.strftime('%Y-%m-%d')
 	theme = "&theme=" + theme
 	budget = "&maxFare=budget"
-	top = "&topdestinations=5"
+	top = "&topdestinations=10"
 	urlAppend = "/shop/flights/fares"
 	url = baseUrl + urlAppend + origin + start + end + theme + top
 

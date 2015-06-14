@@ -9,7 +9,7 @@ import foursquare
 import config
 from wanderlust import app
 import destination_finder
-# import flickrapi
+import flickrapi
 
 FLICKR_API_KEY = 'c0ddc6281f8ef9b3d565b00427c3c0e8'
 FLICKR_API_SIG = 'a54bb061d1231d3f'
@@ -95,7 +95,7 @@ def find_airport_code(airport_code):
 
 def find_photos(location):
     flickr = flickrapi.FlickrAPI(FLICKR_API_KEY, FLICKR_API_SIG, format='parsed-json')
-    photos = flickr.photos.search(text=location, per_page='10')
+    photos = flickr.photos.search(text=location, per_page='12')
     photos = photos['photos']['photo']
     url_arr = []
     for photo in photos:

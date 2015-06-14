@@ -1,4 +1,8 @@
 .itinerary-hotel {
+  h2 {
+    position: relative;
+  }
+
   ul {
     display: flex;
     flex-flow: row nowrap;
@@ -19,7 +23,78 @@
 
     img {
       height: 250px;
-      width: 250px;
+
     }
   }
+
+  .hotel-card {
+    overflow: hidden;
+    border-radius: 4px;
+    height: 300px;
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+
+  }
+
+  .hotel-content {
+    padding: 15px 5px 9px;
+    background-color: #666;
+    color: #ddd;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+  }
+
+  .hotel-name {
+    font-size: 24px;
+  }
+
+  .hotel-price {
+    font-size: 30px;
+  }
+}
+
+.itinerary-flight {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin-bottom: 1em;
+
+  h2 {
+    display: inline-block;
+    margin: 0;
+    margin-right: 15px;
+  }
+
+  .flight-content {
+    font-size: 22px;
+  }
+}
+
+.itinerary-gallery {
+  margin-top: 5em;
+  margin-bottom: 10em;
+
+  .gallery-wrap {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .gallery-item {
+    margin: 5px;
+    background: transparent none no-repeat center / cover;
+    height: 300px;
+    width: 300px;
+  }
+}
+
+.btn-action {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
 }

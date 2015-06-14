@@ -25,7 +25,6 @@
 
             wlVenues.get().then(function (venues) {
                 $vm.venues = venues.data;
-                console.log(venues);
             });
         }
 

@@ -19,8 +19,8 @@
         ////////////////////////////////////////////////////////////////////////////////
 
         function init () {
-            $vm.tripQuery = tripQuery.data;
-            $vm.tripList = tripQuery.data.FareInfo;
+            $vm.tripQuery = tripQuery || tripQuery.data;
+            $vm.tripList = tripQuery.FareInfo || tripQuery.data.FareInfo;
 
             var savedTripInfo = wlTripQuery.getTripInfo();
             $vm.tripInfo = {

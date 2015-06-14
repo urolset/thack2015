@@ -73,10 +73,15 @@ $themeIcon: (
   }
 }
 
+.theme-content,
+.date-content {
+  font-size: 22px;
+}
+
 .theme-icon {
   display: inline-block;
-  width: 2em;
-  height: 2em;
+  width: 1.5em;
+  height: 1.5em;
   background: transparent none no-repeat center / contain;
   vertical-align: bottom;
 
@@ -85,6 +90,10 @@ $themeIcon: (
       background-image: url(../../images/themes/#{$theme}.png);
     }
   }
+}
+
+.trip-information {
+  margin-bottom: 25px;
 }
 
 .itinerary-icon {
@@ -104,5 +113,65 @@ $themeIcon: (
     &.flight-arrival {
       transform: rotate(180deg);
     }
+  }
+}
+
+.logo-amadeus {
+  background: transparent no-repeat center / contain;
+  background-image: url(../../images/amadeus.png);
+  display: inline-block;
+  height: 25px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100px;
+
+  &::before {
+    content: "Powered By: ";
+    font-size: 1.2rem;
+    position: absolute;
+    left: -70%;
+    top: 50%;
+    margin-top: -.5em;
+  }
+}
+
+.logo-sabre {
+  background: transparent no-repeat center / contain;
+  background-image: url(../../images/sabre.png);
+  display: inline-block;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 80px;
+
+
+  &::before {
+    content: "Powered By: ";
+    font-size: 1.2rem;
+    position: absolute;
+    left: -85%;
+    top: 50%;
+    margin-top: -.25em;
+  }
+}
+
+.trip-title {
+  position: relative;
+}
+
+.price-section {
+  display: inline-block;
+  width: 25%;
+  //height: 100px;
+
+  .price-title {
+    font-size: 14px;
+    color: gray;
+  }
+
+  .price-amount {
+    font-size: 24px;
   }
 }

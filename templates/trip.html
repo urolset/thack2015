@@ -1,37 +1,33 @@
 {% raw %}
 <section class="container">
   <hgroup>
-    <h1>Your Trip Recommendations</h1>
-    <div>
-      <div>
-        <span>Theme:</span>
+    <h1 class="trip-title">Your Trip Recommendations <span class="logo-sabre"></span></h1>
+    <div class="trip-information">
+      <span class="theme-content">
         <i class="theme-icon theme-{{$vm.tripInfo.theme | lowercase}}"></i>
-        {{ $vm.tripInfo.theme }}</div>
-      <div>From: {{ $vm.tripInfo.startDate | date:'MMMM d, yyyy' }}</div>
-      <div>To: {{ $vm.tripInfo.endDate | date:'MMMM d, yyyy' }}</div>
+        {{ $vm.tripInfo.theme }}
+      </span>
+      <span class="date-content">{{ $vm.tripInfo.startDate | date:'MMMM d, yyyy' }} -</span>
+
+      <span class="date-content">{{ $vm.tripInfo.endDate | date:'MMMM d, yyyy' }}</span>
     </div>
   </hgroup>
 
   <article class="trip-panel container-fluid panel" id="trip-{{$index}}" ng-repeat="trip in $vm.tripList track by $index" data-delay="{{$index}}">
     <div>
       <hgroup>
-        <h2>{{ trip.city }}</h2>
+        <h2>{{ trip.city }} - {{trip.DestinationLocation}}</h2>
       </hgroup>
-      <div class="trip-activity-group">
-        <div class="trip-activity">
-          <img src="" alt="activities">
+
+      <div class="trip-flights">
+        <div class="price-section">
+          <div class="price-title">Lowest Nonstop</div>
+          <div class="price-amount {{ trip.LowestNonStopFare == trip.LowestFare ? 'text-primary' : ''}}">{{ trip.LowestNonStopFare | currency }}</div>
         </div>
-        <div class="trip-activity">
-          <img src="" alt="activities">
-        </div>
-        <div class="trip-activity">
-          <img src="" alt="activities">
-        </div>
-        <div class="trip-activity">
-          <img src="" alt="activities">
-        </div>
-        <div class="trip-activity">
-          <img src="" alt="activities">
+
+        <div class="price-section">
+          <div class="price-title">Lowest</div>
+          <div class="price-amount {{ trip.LowestNonStopFare >= trip.LowestFare ? 'text-primary': '' }}">{{ trip.LowestFare | currency }}</div>
         </div>
       </div>
 
