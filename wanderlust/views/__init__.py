@@ -1,5 +1,6 @@
 import urllib2
 import json
+import datetime
 
 from flask import Flask, render_template, request, make_response, send_from_directory
 
@@ -16,37 +17,33 @@ AMADEUS_API_KEY = 'mjGDldAMY6BtzUfGFeUwvjHdadiGo2rC'
 
 client = foursquare.Foursquare(client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def index(path):
-    print "attemping to load ", path
-    return render_template('index.html')
-
 @app.route('/static/<path:path>')
 def static_files(path):
     return send_from_directory('static', path)
 
 @app.route('/ng/<path:path>')
 def ng_template(path):
-    print path
     return render_template(path)
 
 ### PUT ROUTES HERE
 
-@app.route('/dest_finder/', methods=['POST'])
+@app.route('/dest_finder', methods=['POST'])
 def dest_finder():
-	startDate=request.form['startDate']
-	endDate=request.form['endDate']
-	theme=request.form['theme']
-	budget=request.form['budget']
-	return destination_finder.dest_finder(startDate, endDate, theme, budget)
+    data = request.get_json()
+
+    startDate = datetime.datetime.strptime(data['startDate'], '%Y-%m-%dT%H:%M:%S.%fZ')
+    endDate = datetime.datetime.strptime(data['endDate'], '%Y-%m-%dT%H:%M:%S.%fZ')
+    theme = data['theme']
+    budget = data['budget']
+    return destination_finder.dest_finder(startDate, endDate, theme, budget)
 
 
 @app.route('/search_venue/', methods=['POST'])
 def find_venues():
-    location = find_airport_code(request.form['airport_code'])
-    query = request.form['triptype']
-    budget = request.form['budget']
+    data = request.get_json()
+    location = find_airport_code(data['airport_code'])
+    query = data['triptype']
+    budget = data['budget']
     x = client.venues.explore(params={'near': location, 'query': query, 'limit': 10, 'price' : budget})
     jsonarray = json.dumps(x)
     return jsonarray
@@ -55,16 +52,24 @@ def find_venues():
 @app.route('/hotel_search/', methods=['POST'])
 def find_hotels():
 	# location = find_lat_long_code(request.form['airport_code'])
-    location = find_city_lat_long(request.form['airport_code'])
-    checkin = request.form['check-in']
-    checkout = request.form['check-out']
+    data = request.get_json()
+    location = find_city_lat_long(data['airport_code'])
+    checkin = data['check-in']
+    checkout = data['check-out']
     # amadeus_string = 'http://api.sandbox.amadeus.com/v1.2/hotels/search-circle?' + 'latitude=' + location[0] + '&longitude=' + location[1]
     amadeus_string = 'http://api.sandbox.amadeus.com/v1.2/hotels/search-circle?' + 'latitude=' + str(location[0]) + '&longitude=' + str(location[1])
     amadeus_string = amadeus_string + '&radius=5' + '&number_of_results=10' + '&check_in=' + checkin + '&check_out=' + checkout
     amadeus_string = amadeus_string + '&apikey=' + AMADEUS_API_KEY
-    hotel_results = json.dumps(urllib2.urlopen(amadeus_string))
+    print(amadeus_string)
+    hotel_results = json.dumps(list(urllib2.urlopen(amadeus_string)))
     return hotel_results
 
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def index(path):
+    print "attemping to load ", path
+    return render_template('index.html')
 
 def find_city_lat_long(airport_code):
     amadeus_string = 'http://api.sandbox.amadeus.com/v1.2/location/' + airport_code + '/?apikey=' + AMADEUS_API_KEY

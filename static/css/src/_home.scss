@@ -1,0 +1,24 @@
+.wl-datepicker {
+  > table {
+    margin: 0 auto;
+  }
+}
+
+.currency-input {
+  padding-left: 15px;
+  position: relative;
+
+  &::before{
+    content: '$';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 20px;
+  }
+}
+
+.theme-select {
+  option {
+    text-transform: capitalize;
+  }
+}

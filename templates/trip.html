@@ -1,0 +1,48 @@
+{% raw %}
+<section class="container">
+  <hgroup>
+    <h1>Your Trip Recommendations</h1>
+    <div>
+      <div>
+        <span>Theme:</span>
+        <i class="theme-icon theme-{{$vm.tripInfo.theme | lowercase}}"></i>
+        {{ $vm.tripInfo.theme }}</div>
+      <div>From: {{ $vm.tripInfo.startDate | date:'MMMM d, yyyy' }}</div>
+      <div>To: {{ $vm.tripInfo.endDate | date:'MMMM d, yyyy' }}</div>
+    </div>
+  </hgroup>
+
+  <article class="trip-panel container-fluid panel" id="trip-{{trip.index}}" ng-repeat="trip in $vm.tripList" data-delay="{{$index}}">
+    <div>
+      <hgroup>
+        <h2>{{ trip.city }}</h2>
+        <aside>{{ trip.DestinationLocation }}</aside>
+      </hgroup>
+      <div class="trip-activity-group">
+        <div class="trip-activity">
+          <img src="" alt="activities">
+        </div>
+        <div class="trip-activity">
+          <img src="" alt="activities">
+        </div>
+        <div class="trip-activity">
+          <img src="" alt="activities">
+        </div>
+        <div class="trip-activity">
+          <img src="" alt="activities">
+        </div>
+        <div class="trip-activity">
+          <img src="" alt="activities">
+        </div>
+      </div>
+
+      <div class="text-right">
+        <a class="btn btn-default" ng-href="/trip/details/{{trip.index}}">Details</a>
+        <button class="btn btn-success">Book this Trip!</button>
+      </div>
+    </div>
+    <div ui-view></div>
+  </article>
+
+</section>
+{% endraw %}

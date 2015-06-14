@@ -6,7 +6,10 @@
   <title>WanderLust</title>
 </head>
 <body>
-  <ng-view></ng-view>
-{% include "_body_scripts.html" %}
+  {% include "_site_header.html" %}
+
+  <main ng-view></main>
+
+  {% include "_body_scripts.html" %}
 </body>
 </html>
