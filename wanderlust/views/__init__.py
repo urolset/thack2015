@@ -62,8 +62,10 @@ def find_hotels():
     amadeus_string = 'http://api.sandbox.amadeus.com/v1.2/hotels/search-circle?' + 'latitude=' + str(location[0]) + '&longitude=' + str(location[1])
     amadeus_string = amadeus_string + '&radius=5' + '&number_of_results=10' + '&check_in=' + checkin + '&check_out=' + checkout
     amadeus_string = amadeus_string + '&apikey=' + AMADEUS_API_KEY
-    hotel_results = json.dumps(urllib2.urlopen(amadeus_string))
+    print(amadeus_string)
+    hotel_results = json.dumps(list(urllib2.urlopen(amadeus_string)))
     return hotel_results
+
 
 
 def find_city_lat_long(airport_code):
