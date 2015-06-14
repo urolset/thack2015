@@ -5,7 +5,9 @@
         .factory('wlTripQuery', wlTripQueryFactory);
 
     /* @ngInject */
-    function wlTripQueryFactory ($q, $timeout) {
+    function wlTripQueryFactory ($http, $q, $timeout) {
+        var endPoint = '/dest_finder';
+        var _tripInfo = {};
         var _mockData = {
             theme: 'THEME-PARK',
             departureDate: new Date('10/01/2015'),
@@ -52,24 +54,32 @@
 
 
         return {
-            get: get
+            get: get,
+            getTripInfo: getTripInfo,
+            setTripInfo: setTripInfo
         };
 
         ////////////////////////////////////////////////////////////////////
 
-        function get (index) {
-            var defer = $q.defer();
+        function get () {
+            return _POST(_tripInfo);
+        }
 
-            $timeout(function () {
-                if (index && angular.isNumber(parseInt(index))) {
-                    console.log('get specific index');
-                    defer.resolve(_mockData.trips[index-1]);
-                } else {
-                    defer.resolve(_mockData);
-                }
-            }, 10);
+        function getTripInfo () {
+            return _tripInfo;
+        }
 
-            return defer.promise;
+        function setTripInfo (ti) {
+            _tripInfo = ti;
+        }
+
+
+        function _POST (params) {
+            return $http.post(endPoint, params)
+                .success(function (data) {
+                    console.log('get stuff!', data);
+                    return data;
+                });
         }
     }
 })();

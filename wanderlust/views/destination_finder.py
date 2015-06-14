@@ -1,7 +1,7 @@
 from flask.json import jsonify
 import datetime
 import requests
-import json 
+import json
 
 baseUrl = "https://api.test.sabre.com/v1"
 headers = {'Authorization':'Bearer Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/ACPCRTD!ICESMSLB\/CRT.LB!-0123456789012345678!123456!0!ABCDEFGHIJKLM!E2E-1'}
@@ -12,13 +12,14 @@ def dest_finder(startDate, endDate, theme, budget):
 	# lengthOfStay = endDate - startDate
 	# print lengthOfStay
 	origin = "?origin=SFO"
-	start = "&departuredate=" + startDate
-	end = "&returndate=" + endDate
+	start = "&departuredate=" + startDate.strftime('%Y-%m-%d')
+	end = "&returndate=" + endDate.strftime('%Y-%m-%d')
 	theme = "&theme=" + theme
 	budget = "&maxFare=budget"
 	top = "&topdestinations=5"
-	urlAppend = "/shop/flights/fares" 
+	urlAppend = "/shop/flights/fares"
 	url = baseUrl + urlAppend + origin + start + end + theme + top
+	print 'url: ', url
 	response = requests.get(url, headers=headers)
 	return response.text
 

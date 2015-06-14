@@ -12,21 +12,12 @@
     </div>
   </hgroup>
 
-  <article class="trip-panel container-fluid panel" id="trip-{{trip.index}}" ng-repeat="trip in $vm.tripList">
+  <article class="trip-panel container-fluid panel" id="trip-{{trip.index}}" ng-repeat="trip in $vm.tripList" data-delay="{{$index}}">
     <div>
       <hgroup>
         <h2>{{ trip.city }}</h2>
       </hgroup>
       <div class="trip-activity-group">
-        <div class="trip-activity">
-          <img src="" alt="activities">
-        </div>
-        <div class="trip-activity">
-          <img src="" alt="activities">
-        </div>
-        <div class="trip-activity">
-          <img src="" alt="activities">
-        </div>
         <div class="trip-activity">
           <img src="" alt="activities">
         </div>

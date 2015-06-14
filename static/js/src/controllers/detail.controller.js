@@ -5,11 +5,11 @@
         .controller('DetailCtrl', DetailCtrl);
 
     /* @ngInject */
-    function DetailCtrl ($stateParams, tripDetails) {
+    function DetailCtrl ($routeParams, tripDetails) {
         /* jshint validthis:true */
         var $vm = this;
 
-        $vm.index = $stateParams.tripIndex;
+        $vm.index = $routeParams.tripIndex;
         $vm.details = tripDetails;
     }
 })();

@@ -1,5 +1,6 @@
 import urllib2
 import json
+import datetime
 
 from flask import Flask, render_template, request, make_response, send_from_directory
 
@@ -16,31 +17,25 @@ AMADEUS_API_KEY = 'mjGDldAMY6BtzUfGFeUwvjHdadiGo2rC'
 
 client = foursquare.Foursquare(client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def index(path):
-    print "attemping to load ", path
-    return render_template('index.html')
-
 @app.route('/static/<path:path>')
 def static_files(path):
     return send_from_directory('static', path)
 
 @app.route('/ng/<path:path>')
 def ng_template(path):
-    print path
     return render_template(path)
 
 ### PUT ROUTES HERE
 
-@app.route('/dest_finder/', methods=['POST'])
+@app.route('/dest_finder', methods=['POST'])
 def dest_finder():
     data = request.get_json()
-	startDate=data['startDate']
-	endDate=data['endDate']
-	theme=data['theme']
-	budget=data['budget']
-	return destination_finder.dest_finder(startDate, endDate, theme, budget)
+
+    startDate = datetime.datetime.strptime(data['startDate'], '%Y-%m-%dT%H:%M:%S.%fZ')
+    endDate = datetime.datetime.strptime(data['endDate'], '%Y-%m-%dT%H:%M:%S.%fZ')
+    theme = data['theme']
+    budget = data['budget']
+    return destination_finder.dest_finder(startDate, endDate, theme, budget)
 
 
 @app.route('/search_venue/', methods=['POST'])
@@ -70,6 +65,11 @@ def find_hotels():
     return hotel_results
 
 
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def index(path):
+    print "attemping to load ", path
+    return render_template('index.html')
 
 def find_city_lat_long(airport_code):
     amadeus_string = 'http://api.sandbox.amadeus.com/v1.2/location/' + airport_code + '/?apikey=' + AMADEUS_API_KEY

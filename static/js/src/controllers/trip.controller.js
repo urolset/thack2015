@@ -5,7 +5,7 @@
         .controller('TripCtrl',TripCtrl);
 
     /* @ngInject */
-    function TripCtrl ($state, tripQuery) {
+    function TripCtrl (tripQuery) {
         /* jshint validthis:true */
         var $vm = this;
         $vm.tripList = [];
@@ -16,13 +16,13 @@
         ////////////////////////////////////////////////////////////////////////////////
 
         function init () {
-            $vm.tripInfo = {
-                startDate: tripQuery.departureDate,
-                endDate: tripQuery.arrivalDate,
-                theme: tripQuery.theme
-            };
+            $vm.tripList = tripQuery.data.FareInfo;
 
-            $vm.tripList = tripQuery.trips;
+            $vm.tripInfo = {
+                startDate: new Date($vm.tripList[0].DepartureDateTime),
+                endDate: new Date($vm.tripList[0].ReturnDateTime),
+                theme: $vm.tripList[0].Theme
+            };
         }
 
     }
