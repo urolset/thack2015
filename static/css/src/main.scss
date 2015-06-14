@@ -18,10 +18,17 @@ $themeIcon: (
 @import "home";
 @import "itinerary";
 
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Raleway', sans-serif;
+}
+
 .wl-title {
-  font-family: Oxygen;
+  font-family: 'Lobster Two', cursive, sans-serif;
   font-weight: bold;
-  font-size: 54px;
+
+  &.wl-title-lg {
+    font-size: 54px;
+  }
 }
 
 .wl-subtitle {
@@ -105,14 +112,6 @@ $themeIcon: (
 
   &.flight-icon {
     background-image: url(../../images/icons/flight.png);
-
-    &.flight-departure {
-
-    }
-
-    &.flight-arrival {
-      transform: rotate(180deg);
-    }
   }
 }
 
@@ -130,7 +129,7 @@ $themeIcon: (
     content: "Powered By: ";
     font-size: 1.2rem;
     position: absolute;
-    left: -70%;
+    left: -80%;
     top: 50%;
     margin-top: -.5em;
   }

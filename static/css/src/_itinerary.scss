@@ -39,8 +39,8 @@
 
   .hotel-content {
     padding: 15px 5px 9px;
-    background-color: #666;
-    color: #ddd;
+    background-color: #607D8B;
+    color: #eee;
     height: 100px;
     position: absolute;
     bottom: 0;
@@ -50,11 +50,14 @@
   }
 
   .hotel-name {
-    font-size: 24px;
+    font-size: 18px;
+    text-align: left;
+    padding-left: 10px;
   }
 
   .hotel-price {
-    font-size: 30px;
+    font-size: 28px;
+    padding-left: 10px;
   }
 }
 
@@ -72,6 +75,11 @@
 
   .flight-content {
     font-size: 22px;
+  }
+
+  .itinerary-icon {
+    margin: .25em;
+    margin-top: 0;
   }
 }
 
@@ -97,4 +105,9 @@
   position: fixed;
   bottom: 25px;
   right: 25px;
+}
+
+.input-group-addon {
+  position: relative;
+  right: -.75em;
 }
