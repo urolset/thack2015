@@ -38,31 +38,33 @@ def dest_finder():
     return destination_finder.dest_finder(startDate, endDate, theme, budget)
 
 
-@app.route('/search_venue/', methods=['POST'])
+@app.route('/search_venue', methods=['POST'])
 def find_venues():
     data = request.get_json()
-    location = find_airport_code(data['airport_code'])
+    #location = find_airport_code(data['airport_code'])
+    location = data['city']
     query = data['triptype']
     budget = data['budget']
     x = client.venues.explore(params={'near': location, 'query': query, 'limit': 10, 'price' : budget})
     jsonarray = json.dumps(x)
+    print jsonarray
     return jsonarray
 
 # not working yet
-@app.route('/hotel_search/', methods=['POST'])
+@app.route('/hotel_search', methods=['POST'])
 def find_hotels():
 	# location = find_lat_long_code(request.form['airport_code'])
     data = request.get_json()
     location = find_city_lat_long(data['airport_code'])
-    checkin = data['check-in']
-    checkout = data['check-out']
+    checkin = datetime.datetime.strptime(data['check-in'], '%Y-%m-%dT%H:%M:%S.%fZ')
+    checkout = datetime.datetime.strptime(data['check-out'], '%Y-%m-%dT%H:%M:%S.%fZ')
     # amadeus_string = 'http://api.sandbox.amadeus.com/v1.2/hotels/search-circle?' + 'latitude=' + location[0] + '&longitude=' + location[1]
     amadeus_string = 'http://api.sandbox.amadeus.com/v1.2/hotels/search-circle?' + 'latitude=' + str(location[0]) + '&longitude=' + str(location[1])
-    amadeus_string = amadeus_string + '&radius=5' + '&number_of_results=10' + '&check_in=' + checkin + '&check_out=' + checkout
+    amadeus_string = amadeus_string + '&radius=5' + '&number_of_results=3' + '&check_in=' + checkin.strftime('%Y-%m-%d') + '&check_out=' + checkout.strftime('%Y-%m-%d')
     amadeus_string = amadeus_string + '&apikey=' + AMADEUS_API_KEY
     print(amadeus_string)
-    hotel_results = json.dumps(list(urllib2.urlopen(amadeus_string)))
-    return hotel_results
+    hotel_results = json.load(urllib2.urlopen(amadeus_string))
+    return json.dumps(hotel_results)
 
 
 @app.route('/', defaults={'path': ''})
