@@ -96,5 +96,12 @@ def find_photos(location):
     photos = photos['photos']['photo']
     url_arr = []
     for photo in photos:
-        url_arr.append("https://www.flickr.com/photos/" + photo['owner'] + '/' + photo['id'] + '/')
+        url_arr.append('https://farm{0}.staticflickr.com/{1}/{2}_{3}.jpg'.format(
+            photo['farm'],
+            photo['server'],
+            photo['id'],
+            photo['secret']
+        ))
+
+        #url_arr.append("https://www.flickr.com/photos/" + photo['owner'] + '/' + photo['id'] + '/')
     return url_arr

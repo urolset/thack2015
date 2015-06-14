@@ -18,6 +18,30 @@ $themeIcon: (
 @import "home";
 @import "itinerary";
 
+.wl-title {
+  font-family: Oxygen;
+  font-weight: bold;
+  font-size: 54px;
+}
+
+.wl-subtitle {
+  font-size: 20px;
+}
+
+.datepicker-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .6s;
+
+  &.focused {
+    max-height: 500px;
+  }
+}
+
+.icon-inline {
+  vertical-align: middle;
+}
+
 .trip-panel {
   position: relative;
 }

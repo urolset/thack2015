@@ -37,6 +37,12 @@
     </ul>
   </div>
 
+  <div class="itinerary-gallery">
+    <div ng-repeat="image in $vm.venues.photos">
+      <img ng-src="{{image}}" alt="flickr image">
+    </div>
+  </div>
+
   <div class="itinerary-flight">
     <h2>Arrival Flight <i class="itinerary-icon flight-icon flight-arrival"></i></h2>
     <h3>{{$vm.details.in.airline}}</h3>

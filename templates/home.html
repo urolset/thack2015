@@ -1,35 +1,48 @@
 {% raw %}
 <section class="container">
-  <div class="text-center">
-    <div class="wl-datepicker">
-      <span>Departure Date</span>
-      <datepicker class="text-center" ng-model="$vm.tripInfo.startDate" min-date="$vm.datepickerConfig.minDate" required></datepicker>
+  <div class="panel">
+    <hgroup class="col-xs-12">
+      <h1 class="wl-title text-center">WanderLust</h1>
+      <aside class="wl-subtitle text-center">Fulfill your inner desire to travel</aside>
+    </hgroup>
+    <div class="text-center">
+      <div class="wl-datepicker col-xs-6 text-center">
+        <span>Departure Date</span>
+        <div class="text-center">
+          <i class="icon-inline mdi-action-today"></i>
+          {{ $vm.tripInfo.startDate | date:"MMMM d, yyyy" }}
+        </div>
+        <datepicker class="text-center" ng-model="$vm.tripInfo.startDate" min-date="$vm.datepickerConfig.minDate" show-weeks="false" required></datepicker>
+      </div>
+      <div class="wl-datepicker col-xs-6 text-center">
+        <span>Return Date</span>
+        <div class="text-center">
+          <i class="icon-inline mdi-action-today"></i>
+          {{ $vm.tripInfo.endDate | date:"MMMM d, yyyy" }}
+        </div>
+        <datepicker class="text-center" ng-model="$vm.tripInfo.endDate" min-date="$vm.tripInfo.startDate" show-weeks="false" required></datepicker>
+      </div>
     </div>
-    <div class="wl-datepicker">
-      <span>Return Date</span>
-      <datepicker class="text-center" ng-model="$vm.tripInfo.endDate" min-date="$vm.tripInfo.startDate" required></datepicker>
+
+    <div class="row">
+      <form class="container-fluid" novalidate>
+        <div class="input-group form-group col-sm-6">
+          <span class="input-group-addon">$</span>
+          <input type="text" class="form-control floating-label" placeholder="Budget" required>
+        </div>
+
+        <div class="form-group col-sm-6">
+          <select class="select form-control theme-select" ng-model="$vm.tripInfo.theme" required>
+            <option value="" disabled>Select a Theme</option>
+            <option ng-repeat="theme in $vm.themeList" value="{{theme.key}}">{{theme.name}}</option>
+          </select>
+        </div>
+
+        <div class="form-group text-right col-sm-12">
+          <button class="btn btn-primary" ng-click="$vm.submitForm()" type="submit">Find My Trip!</button>
+        </div>
+      </form>
     </div>
   </div>
-
-  <div class="">
-    <form novalidate>
-      <!--
-      <div class="currency-input form-group">
-        <input type="text" class="form-control floating-label" placeholder="Budget" required>
-      </div>-->
-
-      <div class="form-group">
-        <select class="form-control theme-select" ng-model="$vm.tripInfo.theme" required>
-          <option value="" disabled>Select a Theme</option>
-          <option ng-repeat="theme in $vm.themeList" value="{{theme.key}}">{{theme.name}}</option>
-        </select>
-      </div>
-
-      <div class="form-group text-right">
-        <button class="btn btn-primary" ng-click="$vm.submitForm()" type="submit">Find My Trip!</button>
-      </div>
-    </form>
-  </div>
-
 </section>
 {% endraw %}

@@ -58,5 +58,6 @@
 
     function setup () {
         $.material.init();
+        $(".select").dropdown({ "autoinit" : ".select" });
     }
 })();
