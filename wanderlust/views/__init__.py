@@ -35,19 +35,20 @@ def ng_template(path):
 
 @app.route('/dest_finder/', methods=['POST'])
 def dest_finder():
-	startDate=request.form['startDate']
-	endDate=request.form['endDate']
-	theme=request.form['theme']
-	budget=request.form['budget']
+    data = request.get_json()
+	startDate=data['startDate']
+	endDate=data['endDate']
+	theme=data['theme']
+	budget=data['budget']
 	return destination_finder.dest_finder(startDate, endDate, theme, budget)
 
 
 @app.route('/search_venue/', methods=['POST'])
 def find_venues():
-    location = find_airport_code(request.form['airport_code'])
-    query = request.form['triptype']
-    budget = request.form['budget']
-    x = client.venues.explore(params={'near': location, 'query': query, 'limit': 10, 'price' : budget})
+    data = request.get_json()
+    location = find_airport_code(data['airport_code'])
+    query = data['triptype']
+    x = client.venues.explore(params={'near': location, 'query': query, 'limit': 10})
     jsonarray = json.dumps(x)
     return jsonarray
 
@@ -55,9 +56,10 @@ def find_venues():
 @app.route('/hotel_search/', methods=['POST'])
 def find_hotels():
 	# location = find_lat_long_code(request.form['airport_code'])
-    location = find_city_lat_long(request.form['airport_code'])
-    checkin = request.form['check-in']
-    checkout = request.form['check-out']
+    data = request.get_json()
+    location = find_city_lat_long(data['airport_code'])
+    checkin = data['check-in']
+    checkout = data['check-out']
     # amadeus_string = 'http://api.sandbox.amadeus.com/v1.2/hotels/search-circle?' + 'latitude=' + location[0] + '&longitude=' + location[1]
     amadeus_string = 'http://api.sandbox.amadeus.com/v1.2/hotels/search-circle?' + 'latitude=' + str(location[0]) + '&longitude=' + str(location[1])
     amadeus_string = amadeus_string + '&radius=5' + '&number_of_results=10' + '&check_in=' + checkin + '&check_out=' + checkout
