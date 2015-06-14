@@ -16,6 +16,7 @@
     <div>
       <hgroup>
         <h2>{{ trip.city }}</h2>
+        <aside>{{ trip.DestinationLocation }}</aside>
       </hgroup>
       <div class="trip-activity-group">
         <div class="trip-activity">
@@ -36,7 +37,7 @@
       </div>
 
       <div class="text-right">
-        <button class="btn btn-default" ui-sref="details({tripIndex:trip.index})">Details</button>
+        <a class="btn btn-default" ng-href="/trip/details/{{trip.index}}">Details</a>
         <button class="btn btn-success">Book this Trip!</button>
       </div>
     </div>

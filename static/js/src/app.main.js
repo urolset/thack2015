@@ -31,12 +31,11 @@
                             wlTripQuery.setTripInfo(tripInfo);
                         }
 
-                        console.log('get trip query');
                         return wlTripQuery.get();
                     }
                 }
             })
-            .when('/details/:tripIndex', {
+            .when('/trip/details/:tripIndex', {
                 templateUrl: '/ng/details.html',
                 controller: 'DetailCtrl',
                 controllerAs: '$vm',
