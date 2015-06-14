@@ -9,7 +9,10 @@ import foursquare
 import config
 from wanderlust import app
 import destination_finder
+import flickrapi
 
+FLICKR_API_KEY = 'c0ddc6281f8ef9b3d565b00427c3c0e8'
+FLICKR_API_SIG = 'a54bb061d1231d3f'
 
 CLIENT_ID = 'FVM4J3MFYLWHQPNVZDRZHZ5AGL334X5SLDX24CL4INOB504D'
 CLIENT_SECRET = 'FWIMXJARQMF3ALB1TUQO0E4411EL01OMYDIETOS0VR55HYJQ'
@@ -44,8 +47,10 @@ def find_venues():
     location = find_airport_code(data['airport_code'])
     query = data['triptype']
     budget = data['budget']
-    x = client.venues.explore(params={'near': location, 'query': query, 'limit': 10, 'price' : budget})
-    jsonarray = json.dumps(x)
+    dictionary_arr = client.venues.explore(params={'near': location, 'query': query, 'limit': 10, 'price' : budget})
+    photos = find_photos(location)
+    return_arr = {"venues" : dictionary_arr, "photos" : photos}
+    jsonarray = json.dumps(return_arr)
     return jsonarray
 
 # not working yet
@@ -83,3 +88,12 @@ def find_airport_code(airport_code):
     json_response = json.load(urllib2.urlopen(amadeus_string))
     city_name = json_response['airports'][0]['city_name']
     return city_name
+
+def find_photos(location):
+    flickr = flickrapi.FlickrAPI(FLICKR_API_KEY, FLICKR_API_SIG, format='parsed-json')
+    photos = flickr.photos.search(text=location, per_page='10')
+    photos = photos['photos']['photo']
+    url_arr = []
+    for photo in photos:
+        url_arr.append("https://www.flickr.com/photos/" + photo['owner'] + '/' + photo['id'] + '/')
+    return url_arr
