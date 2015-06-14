@@ -1,25 +1,26 @@
+import urllib2
+import json
+
 from flask import Flask, render_template, request, make_response, send_from_directory
+
+import foursquare
+
+import config
 from wanderlust import app
 import destination_finder
-import urllib2
-import foursquare
-import json
-import config
-import pprint
 
 
 CLIENT_ID = 'FVM4J3MFYLWHQPNVZDRZHZ5AGL334X5SLDX24CL4INOB504D'
 CLIENT_SECRET = 'FWIMXJARQMF3ALB1TUQO0E4411EL01OMYDIETOS0VR55HYJQ'
 AMADEUS_API_KEY = 'mjGDldAMY6BtzUfGFeUwvjHdadiGo2rC'
 
-
 client = foursquare.Foursquare(client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
 
-
-@app.route('/')
-def index():
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def index(path):
+    print "attemping to load ", path
     return render_template('index.html')
-
 
 @app.route('/static/<path:path>')
 def static_files(path):
@@ -29,12 +30,6 @@ def static_files(path):
 def ng_template(path):
     print path
     return render_template(path)
-
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def index(path):
-    print "attemping to load ", path
-    return render_template('index.html')
 
 ### PUT ROUTES HERE
 
