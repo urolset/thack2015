@@ -1,3 +1,5 @@
 *.pyc
 
+.sublime-gulp.cache
 npm-debug.log
+node_modules/

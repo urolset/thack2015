@@ -16,5 +16,20 @@
   "bugs": {
     "url": "https://github.com/urolset/thack2015/issues"
   },
-  "homepage": "https://github.com/urolset/thack2015#readme"
+  "homepage": "https://github.com/urolset/thack2015#readme",
+  "dependencies": {
+    "autoprefixer": "^5.1.1",
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^2.1.0",
+    "gulp-concat": "^2.4.2",
+    "gulp-ng-annotate": "^0.5.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "dlmanning/gulp-sass#2.x",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0",
+    "ng-annotate": "^0.15.4",
+    "node-sass": "^2.1.1",
+    "gulp-livereload": "^2.1.1",
+    "gulp-plumber": "^1.0.0"
+  }
 }

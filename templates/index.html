@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="WanderlustApp">
 <head>
+  {% include "_head_includes.html" %}
+  <base href="/">
   <title>WanderLust</title>
 </head>
 <body>
-hello world!
+  <ng-view></ng-view>
+{% include "_body_scripts.html" %}
 </body>
 </html>

@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, send_from_directory
 from wanderlust import app
 import destination_finder
 import urllib2
 import foursquare
 import json
+import config
 import pprint
 
 
@@ -24,6 +25,18 @@ def index():
 def static_files(path):
     return send_from_directory('static', path)
 
+@app.route('/ng/<path:path>')
+def ng_template(path):
+    print path
+    return render_template(path)
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def index(path):
+    print "attemping to load ", path
+    return render_template('index.html')
+
+### PUT ROUTES HERE
 
 @app.route('/dest_finder/', methods=['POST'])
 def dest_finder():
@@ -70,4 +83,3 @@ def find_airport_code(airport_code):
     json_response = json.load(urllib2.urlopen(amadeus_string))
     city_name = json_response['airports'][0]['city_name']
     return city_name
-
