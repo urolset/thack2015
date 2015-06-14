@@ -46,9 +46,9 @@ def find_venues():
     data = request.get_json()
     #location = find_airport_code(data['airport_code'])
     location = data['city']
-    query = data['triptype']
+    venueType = data['venueType']
     budget = data['budget']
-    dictionary_arr = client.venues.explore(params={'near': location, 'query': query, 'limit': 10, 'price' : budget})
+    dictionary_arr = client.venues.explore(params={'near': location, 'section': venueType, 'limit': 10, 'price' : budget})
     photos = find_photos(location)
     return_arr = {"venues" : dictionary_arr, "photos" : photos}
     jsonarray = json.dumps(return_arr)
