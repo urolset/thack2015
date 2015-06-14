@@ -1,0 +1,25 @@
+.itinerary-hotel {
+  ul {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  li {
+    flex: 1;
+  }
+
+  .hotel-option {
+    > div {
+      text-align: center;
+    }
+
+    label {
+      width: 100%;
+    }
+
+    img {
+      height: 250px;
+      width: 250px;
+    }
+  }
+}

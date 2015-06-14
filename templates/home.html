@@ -1,1 +1,26 @@
-Hello World! This is my homepage
+{% raw %}
+<section class="container">
+  <datepicker class="wl-datepicker text-center" ng-model="$vm.tripInfo.startDate" min-date="$vm.datepickerConfig.minDate" required></datepicker>
+
+  <div class="">
+    <form novalidate>
+      <!--
+      <div class="currency-input form-group">
+        <input type="text" class="form-control floating-label" placeholder="Budget" required>
+      </div>-->
+
+      <div class="form-group">
+        <select class="form-control theme-select" ng-model="$vm.tripInfo.theme" required>
+          <option value="" disabled>Select a Theme</option>
+          <option ng-repeat="theme in $vm.themeList" value="{{theme.key}}">{{theme.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary" ng-click="$vm.submitForm()" type="submit">Find My Trip!</button>
+      </div>
+    </form>
+  </div>
+
+</section>
+{% endraw %}

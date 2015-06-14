@@ -1,0 +1,62 @@
+{% raw %}
+<section class="container">
+  <header>
+    <h1>Trip Itinerary</h1>
+  </header>
+  <div class="">
+    <header class="trip-general-info">
+      <div class="trip-price">
+        <span>{{ $vm.details.price.total | currency }}</span>
+      </div>
+    </header>
+  </div>
+
+  <div class="itinerary-flight">
+    <h2>Departure Flight <i class="itinerary-icon flight-icon flight-departure"></i></h2>
+    <h3>{{$vm.details.out.airline}}</h3>
+    <span>{{$vm.details.out.departureIATA}} {{$vm.details.out.departureDate | date:"h:mm a MMMM d, yyyy" }}</span>
+    --&gt;
+    <span>{{ $vm.details.out.arrivalIATA}} {{$vm.details.out.arrivalDate | date:"h:mm a MMMM d, yyyy" }}</span>
+  </div>
+
+  <div class="itinerary-hotel">
+    <h2>Hotels Recommendations</h2>
+    <span>Pick one</span>
+
+    <ul class="list-unstyled list-inline">
+      <li class="hotel-option">
+        <div>
+          <label for="hotel-1">
+            <img src="" alt="hotel">
+          </label>
+          <input id="hotel-1" name="hotel" type="radio">
+        </div>
+      </li>
+      <li class="hotel-option">
+        <div>
+          <label for="hotel-2">
+            <img src="" alt="hotel">
+          </label>
+          <input id="hotel-2" name="hotel" type="radio">
+        </div>
+      </li>
+      <li class="hotel-option">
+        <div>
+          <label for="hotel-3">
+            <img src="" alt="hotel">
+          </label>
+          <input id="hotel-3" name="hotel" type="radio">
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="itinerary-flight">
+    <h2>Arrival Flight <i class="itinerary-icon flight-icon flight-arrival"></i></h2>
+    <h3>{{$vm.details.in.airline}}</h3>
+    <span>{{$vm.details.in.departureIATA}} {{$vm.details.in.departureDate | date:"h:mm a MMMM d, yyyy" }}</span>
+    --&gt;
+    <span>{{ $vm.details.in.arrivalIATA}} {{$vm.details.in.arrivalDate | date:"h:mm a MMMM d, yyyy" }}</span>
+  </div>
+</section>
+{% endraw %}
