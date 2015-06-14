@@ -32,16 +32,15 @@ def dest_finder(startDate, endDate, theme, budget):
 	url = baseUrl + urlAppend + origin + start + end + theme + top
 
 	print 'url: ', url
+	#get response back fro Sabre
 	response = requests.get(url, headers=headers)
 	json_data = json.loads(response.text)
 	airportCodes = []
 	for result in json_data['FareInfo']:
-		airportCodes.append(result['DestinationLocation'])
+		IATA_code = result['DestinationLocation']
+		result['city'] = find_airport_code(IATA_code)
 
-	cities = []
-	for code in airportCodes:
-		cities.append(find_airport_code(code))
-	return json.dumps(cities)
+	return json.dumps(json_data)
 
 
 def airportCodes_by_theme(input_theme):
